@@ -25,9 +25,11 @@ module.exports = {
         pool.getConnection(function(err, connection) {
             connection.query($sql.queryAll, function(err, result) {
                 res.render('bakery', {
-                    list: result         
+                    list: result        
                 });
-        
+                // res.render('bakTest', {
+                //     result: result[0].bakeryName
+                // });        
                 connection.release();
             });
         });
