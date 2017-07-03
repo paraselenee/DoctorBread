@@ -93,8 +93,8 @@ module.exports = {
     },
 
     login: function (req, res, next) {
-        // update by id
-        // 为了简单，要求同时传name和age两个参数
+        // login by id and password
+        // 输入id和password两个参数
         var param = req.body;
         if(param.password == null || param.id == null) {
             jsonWrite(res, undefined);
@@ -159,7 +159,6 @@ module.exports = {
         });
     },
 
-
-
     
 };
+

@@ -5,7 +5,7 @@
 ##访问地址
 	只有更新接口使用的是post，其它接口都是get。所以其它接口可以通过直接输入URL地址访问：
 
-  ​	增加 http://localhost:3000/p/users/addUser?name=XXX&age=12
+	增加 http://localhost:3000/p/users/addUser?name=XXX&age=12
   	删除 http://localhost:3000/p/users/deleteUser?id=3
   	查询全部 http://localhost:3000/p/users/queryAll
   	ID查询 http://localhost:3000/p/users/query?id=1
