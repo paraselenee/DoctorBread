@@ -1,7 +1,14 @@
 extends layout
 
 block content 
-	h1= 面包店
-	//- ol  
-	//- - each obj in list  
-	//- 	li= obj
+	h1 面包店
+	ol  
+	- each obj, i in list  
+		li= obj
+	//-pre #{JSON.parse(result)}
+	//- pre #{JSON.stringify(result)}
+
+	//- ol 
+	//- 	each item, i in result
+	//- 		pre #{JSON.stringify(result[#{i}])}
+		

@@ -112,7 +112,7 @@ module.exports = {
                     if (param.password == result[0].password){
                         res.render('suc', {
                             result: result
-                        }); // 第二个参数可以直接在jade中使用
+                        }); 
                     }
                     else {
 
