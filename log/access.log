@@ -76,3 +76,5 @@
 ::1 - - [03/Jul/2017:05:34:23 +0000] "GET /bakery HTTP/1.1" 404 1241 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36"
 ::1 - - [03/Jul/2017:05:34:28 +0000] "GET /bakery HTTP/1.1" 404 1241 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36"
 ::1 - - [03/Jul/2017:05:34:32 +0000] "GET /bakery HTTP/1.1" 404 1241 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36"
+::1 - - [03/Jul/2017:05:39:43 +0000] "GET /bakery HTTP/1.1" 200 237 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36"
+::1 - - [03/Jul/2017:05:39:50 +0000] "GET /bakery HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36"
