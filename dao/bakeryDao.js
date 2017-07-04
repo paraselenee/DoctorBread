@@ -6,7 +6,7 @@ var $util = require('../util/util');
 var $sql = require('./bakerySqlMapping');
 
 // 使用连接池，提升性能
-var pool  = mysql.createPool($util.extend({}, $conf.mysql));
+var pool = mysql.createPool($util.extend({}, $conf.mysql));
 
 // 向前台返回JSON方法的简单封装
 var jsonWrite = function (res, ret) {
@@ -26,10 +26,18 @@ module.exports = {
             connection.query($sql.queryAll, function(err, result) {
                 res.render('bakery', {
                     list: result        
-                });
-                // res.render('bakTest', {
-                //     result: result[0].bakeryName
-                // });        
+                });    
+                connection.release();
+            });
+        });
+    },
+
+    testBakery: function (req, res, next) {
+        pool.getConnection(function(err, connection) {
+            connection.query($sql.queryAll, function(err, result) {
+                res.render('testBakery', {
+                    result: result        
+                });    
                 connection.release();
             });
         });
