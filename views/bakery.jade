@@ -4,5 +4,5 @@ block content
 	h1 面包店
 	- each dot in list
 		p
-			a(href='/bakery/breadOfBakery?bakeryID=' + dot.bakeryID ) #{dot.bakeryName}
+			a(href='/bakery/bakeryName/'+dot.bakeryName+'/bakeryID/' + dot.bakeryID ) #{dot.bakeryName}
 			| #{dot.address}

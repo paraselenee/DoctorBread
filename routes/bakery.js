@@ -8,14 +8,8 @@ router.get('/', function(req, res, next) {
 	bakeryDao.showBakery(req, res, next);
 });
 
-router.get('/breadOfBakery', function(req, res, next) {
-	console.log(req);
-    console.log(res);
-    console.log(next);
-	
+router.get('/bakeryName/:bakeryName/bakeryID/:bakeryID', function(req, res, next) {
 	breadDao.breadOfBakery(req, res, next);
-
 });
-
 
 module.exports = router;

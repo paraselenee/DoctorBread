@@ -28,17 +28,11 @@ module.exports = {
         pool.getConnection(function(err, connection) {
             if (err) throw err; 
             // 获取前台页面传过来的参数
-            var param = req.query || req.params;
+            var param = req.params;
             console.log(param);
-            // connection.query($breadSql.queryByBakery, [param.bakeryID], function(err, result) {
-            //     res.render('breadOfBakery', {
-            //         list: result        
-            //     });     
-            //     console.log(result);            
-            //     connection.release();
-            // });
             connection.query($breadSql.queryByBakery, [param.bakeryID], function(err, result) {
                 res.render('breadOfBakery', {
+                    title: param.bakeryName,
                     list: result        
                 });     
                 console.log(result);            

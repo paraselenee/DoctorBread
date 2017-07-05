@@ -32,21 +32,5 @@ module.exports = {
         });
     },
 
-    // bakeryBread: function (req, res, next) {
-    //     pool.getConnection(function(err, connection) {
-    //         if (err) throw err; 
-    //         // 获取前台页面传过来的参数
-    //         var param = req.query || req.params;
-    //         // 'INSERT INTO user(id, name, age) VALUES(0,?,?)',
-    //         connection.query($sql.queryByID, [param.bakeryID], function(err, result) {
-    //             res.render('bakeryBread', {
-    //                 list: result        
-    //             });     
-    //             console.log(result);            
-    //             connection.release();
-    //         });
-    //     });
-    // },
-
 
 };
