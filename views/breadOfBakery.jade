@@ -1,0 +1,10 @@
+extends layout
+
+block content 
+	//- h1 #{list.bakeryName}
+	- each dot in list
+		p
+			| #{dot.breadName}
+			| #{dot.star}
+			| #{dot.comment}
+			//- a(href='/bakeryBread?bakeryName=' + dot.bakeryID ) 

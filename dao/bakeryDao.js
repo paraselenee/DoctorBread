@@ -32,64 +32,21 @@ module.exports = {
         });
     },
 
-    testBakery: function (req, res, next) {
-        pool.getConnection(function(err, connection) {
-            connection.query($sql.queryAll, function(err, result) {
-                res.render('testBakery', {
-                    result: result        
-                });    
-                connection.release();
-            });
-        });
-    },
-
-    // login: function (req, res, next) {
-    //     // login by id and password
-    //     // 输入id和password两个参数
-    //     var param = req.body;
-    //     if(param.password == null || param.id == null) {
-    //         jsonWrite(res, undefined);
-    //         return;
-    //     }
+    // bakeryBread: function (req, res, next) {
     //     pool.getConnection(function(err, connection) {
-    //         connection.query($sql.queryById, [+param.id], function(err, result) {
-    //             // 使用页面进行跳转提示
-    //             console.log(result);
-    //             if (result.length < 1) {
-    //                 res.render('fail',  {
-    //                     result: result
-    //                 });
-    //             } else {
-    //                 if (param.password == result[0].password){
-    //                     res.render('suc', {
-    //                         result: result
-    //                     }); 
-    //                 }
-    //                 else {
-
-    //                     res.render('wrongPassword',  {
-    //                         result: result
-    //                     });
-    //                 }
-    //             }
-    //             // if(result.affectedRows > 0) {
-    //             //     res.render('suc', {
-    //             //         result: result
-    //             //     }); // 第二个参数可以直接在jade中使用
-    //             // } else {
-    //             //     res.render('fail',  {
-    //             //         result: result
-    //             //     });
-    //             // }
-    //             // console.log(result);
-
+    //         if (err) throw err; 
+    //         // 获取前台页面传过来的参数
+    //         var param = req.query || req.params;
+    //         // 'INSERT INTO user(id, name, age) VALUES(0,?,?)',
+    //         connection.query($sql.queryByID, [param.bakeryID], function(err, result) {
+    //             res.render('bakeryBread', {
+    //                 list: result        
+    //             });     
+    //             console.log(result);            
     //             connection.release();
     //         });
     //     });
-
-    //},
-
-
+    // },
 
 
 };

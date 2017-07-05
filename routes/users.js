@@ -18,10 +18,10 @@ router.get('/login', function(req, res, next) {
 //TODO 同时支持get,post
 router.get('/addUser', function(req, res, next) {
     userDao.add(req, res, next);
+
 });
 
 router.get('/queryAll', function(req, res, next) {
-    console.log('查询所有user');
     userDao.queryAll(req, res, next);
 });
 
