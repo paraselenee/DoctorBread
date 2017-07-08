@@ -3,6 +3,6 @@ extends layout
 block content 
 	h1 面包店
 	- each dot in list
-		p
-			a(href='/bakery/bakeryName/'+dot.bakeryName+'/bakeryID/' + dot.bakeryID ) #{dot.bakeryName}
+		p		
+			a(href='/bread/list/' + dot.bakeryName + '-' + dot.bakeryId ) #{dot.bakeryName}
 			| #{dot.address}

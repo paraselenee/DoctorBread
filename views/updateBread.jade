@@ -1,0 +1,35 @@
+extends layout
+
+block content
+    h1 更新面包
+    form(method='post', action='/bread/update')
+        div.form-row
+            label
+                span 面包房:
+                input(type='text',name='bakeryId')
+        div.form-row
+            label
+                span ID:
+                input(type='text',name='breadId')
+        div.form-row
+            label
+                span 面包:
+                input(type='text',name='breadName')
+        div.form-row
+            label
+                span 星星:
+                input(type='text',name='star')
+        div.form-row
+            label
+                span 说点啥:
+                input(type='text',name='comment')
+        div.form-row
+            label
+                span 又买一次:
+                input(type='text',name='buyAgain')
+        div.form-row
+            label
+                span 图片:
+                input(type='text',name='image')
+        div.form-row
+            input(type='submit')

@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var bakery = require('./routes/bakery');
+var bread = require('./routes/bread');
 
 var app = express();
 
@@ -31,6 +32,7 @@ app.use(logger('combined', {stream: accessLogStream}));
 app.use('/', routes);
 app.use('/p/users', users); // 自定义cgi路径
 app.use('/bakery', bakery);
+app.use('/bread', bread);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

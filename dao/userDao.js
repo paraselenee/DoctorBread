@@ -63,12 +63,12 @@ module.exports = {
             });
         });
     },
+    
     update: function (req, res, next) {
         // update by id
         // 为了简单，要求同时传name和age两个参数
         var param = req.body;
         if(param.username == null || param.password == null || param.id == null) {
-            jsonWrite(res, undefined);
             return;
         }
 
@@ -84,12 +84,9 @@ module.exports = {
                         result: result
                     });
                 }
-                console.log(result);
-
                 connection.release();
             });
         });
-
     },
 
     login: function (req, res, next) {
@@ -103,7 +100,6 @@ module.exports = {
         pool.getConnection(function(err, connection) {
             connection.query($sql.queryById, [+param.id], function(err, result) {
                 // 使用页面进行跳转提示
-                console.log(result);
                 if (result.length < 1) {
                     res.render('fail',  {
                         result: result
@@ -138,9 +134,8 @@ module.exports = {
 
     },
 
-
-
     queryById: function (req, res, next) {
+        console.log(req.query.id);
         var id = +req.query.id; // 为了拼凑正确的sql语句，这里要转下整数
         pool.getConnection(function(err, connection) {
             connection.query($sql.queryById, id, function(err, result) {
@@ -150,6 +145,7 @@ module.exports = {
             });
         });
     },
+
     queryAll: function (req, res, next) {
         pool.getConnection(function(err, connection) {
             connection.query($sql.queryAll, function(err, result) {
@@ -159,6 +155,5 @@ module.exports = {
         });
     },
 
-    
 };
 

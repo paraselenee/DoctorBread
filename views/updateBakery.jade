@@ -1,0 +1,23 @@
+extends layout
+
+block content
+    h1 更新面包房
+    form(method='post', action='/bakery/update')
+        div.form-row
+            label
+                span ID:
+                input(type='text',name='bakeryId')
+        div.form-row
+            label
+                span 面包店:
+                input(type='text',name='bakeryName')
+        div.form-row
+            label
+                span 地址:
+                input(type='text',name='address')
+        div.form-row
+            label
+                span 图片:
+                input(type='text',name='image')
+        div.form-row
+            input(type='submit')

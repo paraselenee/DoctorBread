@@ -32,5 +32,71 @@ module.exports = {
         });
     },
 
+    add: function (req, res, next) {
+        pool.getConnection(function(err, connection) {
+            if (err) throw err; 
+            var param = req.query || req.params;
+            connection.query($sql.insert, [param.bakeryName, param.address, param.image, param.bakeryId], function(err, result) {
+                if(result) {
+                    result = {
+                        code: 200,
+                        msg:'增加成功'
+                    };    
+                }
+                connection.release();
+            });
+        });
+    },
+
+    delete: function (req, res, next) {
+        //delete by id
+        pool.getConnection(function(err, connection) {
+            var param = req.query || req.params;
+            connection.query($sql.delete, [param.bakeryID], function(err, result) {
+                if(result.affectedRows > 0) {
+                    result = {
+                        code: 200,
+                        msg:'删除成功'
+                    };
+                } else {
+                    result = void 0;
+                }
+                connection.release();
+            });
+        });
+    },
+
+    update: function (req, res, next) {
+        var param = req.body;
+        if(param.bakeryName == null || param.address == null || param.image == null) {
+            return;
+        }
+        pool.getConnection(function(err, connection) {
+            connection.query($sql.update, [param.bakeryName, param.address, param.image, param.bakeryId], function(err, result) {
+                // 使用页面进行跳转提示
+                console.log(result);
+                if(result.affectedRows > 0) {
+                    res.render('suc', {
+                        result: result
+                    }); // 第二个参数可以直接在jade中使用
+                } else {
+                    res.render('fail',  {
+                        result: result
+                    });
+                }
+                connection.release();
+            });
+        });
+    },
+
+    queryById: function (req, res, next) {
+        var id = req.query.id; // 为了拼凑正确的sql语句，这里要转下整数
+        pool.getConnection(function(err, connection) {
+            connection.query($sql.queryById, id, function(err, result) {
+                jsonWrite(res, result);
+                connection.release();
+            });
+        });
+    },
 
 };
