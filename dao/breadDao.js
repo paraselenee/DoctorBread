@@ -43,13 +43,22 @@ module.exports = {
         pool.getConnection(function(err, connection) {
             if (err) throw err; 
             var param = req.query || req.params;
-            connection.query($sql.insert, [param.bakeryId, param.breadName, param.star, param.comment, param.buyAgain, param.image, param.breadId], function(err, result) {
+            console.log(param.breadName);
+            if((param.breadName == '' )||(param.breadName == undefined )) {
+                jsonWrite(res, '面包叫啥勒');
+                return;
+            }
+            param.rating = param.rating ? param.rating : null;
+            param.buyAgain = param.buyAgain ? param.buyAgain : null;
+            connection.query($sql.insert, [param.bakeryId, param.breadName, param.rating, 
+            param.comment, param.buyAgain, param.image], function(err, result) {
                 if(result) {
                     result = {
                         code: 200,
                         msg:'增加成功'
                     };    
                 }
+                jsonWrite(res, result);
                 connection.release();
             });
         });
@@ -76,15 +85,19 @@ module.exports = {
     update: function (req, res, next) {
         // update by id
         var param = req.body;
-        // if(param.breadName == null || param.star == null || param.comment == null || param.buyAgain == null || param.image == null) {
-        //     jsonWrite(res, undefined);
-        //     return;
-        // }
+        if(param.breadName == '' ) {
+            jsonWrite(res, '面包叫啥勒');
+            return;
+        }
 
         pool.getConnection(function(err, connection) {
-            connection.query($sql.update, [param.bakeryId, param.breadName, param.star, param.comment, param.buyAgain, param.image, param.breadId], function(err, result) {
+            param.rating = param.rating ? param.rating : null;
+            param.buyAgain = param.buyAgain ? param.buyAgain : null;
+            connection.query($sql.update, [param.bakeryId, param.breadName, param.rating, 
+            param.comment, param.buyAgain, param.image, param.breadId], function(err, result) {
+                console.log(err);
                 // 使用页面进行跳转提示
-                if(result.affectedRows > 0) {
+                if(result && result.affectedRows > 0) {
                     res.render('suc', {
                         result: result
                     }); // 第二个参数可以直接在jade中使用

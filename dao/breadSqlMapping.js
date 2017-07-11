@@ -1,8 +1,8 @@
 // dao/breadSqlMapping.js
 // CRUD SQL语句
 var bread = {
-    insert:'INSERT INTO (bakeryId, breadName, stars, comment, buyAgain, image) VALUES(?,?,?,?,?,?)',
-    update:'update bread set bakeryId=?, breadName=?, star=?, comment=?, buyAgain=?, image=? where breadId=?',
+    insert:'INSERT INTO bread(bakeryId, breadName, rating, comment, buyAgain, image) VALUES(?,?,?,?,?,?)',
+    update:'UPDATE bread SET bakeryId=?, breadName=?, rating=?, comment=?, buyAgain=?, image=? WHERE breadId=?',
     delete: 'delete from bread where breadId=?',
     queryById: 'select * from bread where breadId=?',
     queryByBakery: 'select * from bread where bakeryId=?',

@@ -36,13 +36,20 @@ module.exports = {
         pool.getConnection(function(err, connection) {
             if (err) throw err; 
             var param = req.query || req.params;
-            connection.query($sql.insert, [param.bakeryName, param.address, param.image, param.bakeryId], function(err, result) {
-                if(result) {
+            if((param.bakeryName == '' )||(param.bakeryName == '' )) {
+                jsonWrite(res, '面包店叫啥勒');
+                return;
+            }            
+            connection.query($sql.insert, [param.bakeryName, param.address, param.image], function(err, result) {
+            console.log(err);
+               if(result) {
                     result = {
                         code: 200,
                         msg:'增加成功'
                     };    
                 }
+                console.log(result);
+                jsonWrite(res, result);
                 connection.release();
             });
         });
