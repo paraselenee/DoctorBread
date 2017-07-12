@@ -15,11 +15,11 @@ router.get('/delete', function(req, res, next) {
     breadDao.delete(req, res, next);
 });
 
-router.get('/update', function(req, res, next) {
-    res.render('updateBread');
+router.get('/update/:breadId', function(req, res, next) {
+    breadDao.updateChart(req, res, next);
 });
 
-router.post('/update', function(req, res, next) {
+router.post('/update/:breadId', function(req, res, next) {
     breadDao.update(req, res, next);
 });
 

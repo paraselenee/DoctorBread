@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+// var cors = require('cors');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -65,5 +66,10 @@ app.use(function(err, req, res, next) {
   });
 });
 
+// app.use(cors({
+//     origin:['http://localhost:3000'], //- originally 8080
+//     methods:['GET','POST'],
+//     alloweHeaders:['Conten-Type', 'Authorization']
+// }));
 
 module.exports = app;

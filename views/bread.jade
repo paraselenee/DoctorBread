@@ -1,0 +1,9 @@
+extends layout
+
+block content 
+	h1 #{title}
+	each dot in list
+		p
+			a(href='/bread/update/' + dot.breadId) #{dot.breadName}
+			| #{dot.rating}
+			| #{dot.comment}
