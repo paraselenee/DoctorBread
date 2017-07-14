@@ -1,15 +1,15 @@
-extends layout    
-    
+extends layout
+
 block content 
-    h1 #{title}
-    form(method='post', action='/bread/update/#{list[0].breadId}')
+    h1= '添加面包'
+    form(method='post', action='/bread/add')
         div.form-row
             label
-                span 面包店
-                select(id="mySelect",name='bakeryId')
+                span 在哪家买的
+                select(name='bakeryId')
+                    option(value=0, ) #{bakery.bakeryName}
                     each bakery in bakeryList
-                        option(value="#{bakery.bakeryId}",selected=bakery.bakeryId == list[0].bakeryId) #{bakery.bakeryName}
-                    option(value="/bakery/add") 添加新的面包店                    
+                        option(value="#{bakery.bakeryId}") #{bakery.bakeryName}
         div.form-row
             label
                 span 面包
@@ -17,10 +17,10 @@ block content
         div.form-row
             label
                 span 星星
-                select(name='rating')
-                    - for (var i=0; i<8; i++){
-                        option(value=i,selected=i == list[0].rating) #{i}
-                    - }                  
+                if list[0].rating == null
+                    input(type='text',name='rating',value='')
+                else
+                    input(type='text',name='rating',value="#{list[0].rating}")
         div.form-row
             label
                 span 说点啥
@@ -34,7 +34,8 @@ block content
                 if list[0].buyAgain == null
                     input(type='text',name='buyAgain',value='')
                 else
-                    input(type='text',name='buyAgain',value="#{list[0].buyAgain}")                  
+                    input(type='text',name='buyAgain',value="#{list[0].buyAgain}")
+                    
         div.form-row
             label
                 span 图片
@@ -44,3 +45,6 @@ block content
                     input(type='text',name='image',placeholder='传个照片~',value="#{list[0].image}")
         div.form-row
             input(type='submit')
+
+block append scripts
+    script

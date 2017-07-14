@@ -8,6 +8,10 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/add', function(req, res, next) {
+    res.render('addBakery');     
+});
+
+router.post('/add', function(req, res, next) {
     bakeryDao.add(req, res, next);
 });
 

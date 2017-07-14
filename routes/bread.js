@@ -8,6 +8,10 @@ router.get('/list/:bakeryName-:bakeryId', function(req, res, next) {
 });
 
 router.get('/add', function(req, res, next) {
+    res.render('addBread');     
+});
+
+router.post('/add', function(req, res, next) {
     breadDao.add(req, res, next);
 });
 
