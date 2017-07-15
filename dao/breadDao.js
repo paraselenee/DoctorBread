@@ -22,7 +22,6 @@ var jsonWrite = function (res, ret) {
 };
 
 module.exports = {
-
     queryByBakery: function (req, res, next) {
         pool.getConnection(function(err, connection) {
             if (err) throw err; 
@@ -38,43 +37,47 @@ module.exports = {
         });
     },
 
+    addChart: function(req, res, next){
+        //returns all the bakeries in chart bakery
+        pool.getConnection(function(err, connection) {
+            connection.query($sqlBakery.queryAll, function(err, result) {
+                res.render('addBread', {
+                    bakeryList : result
+                });
+            });
+        });
+    },
+
     add: function (req, res, next) {
         pool.getConnection(function(err, connection) {
             if (err) throw err; 
-            var param = req.query || req.params;
-            console.log(param.breadName);
+            var param = req.body;
             if((param.breadName == '' )||(param.breadName == undefined )) {
                 jsonWrite(res, '面包叫啥勒');
                 return;
             }
-            param.rating = param.rating ? param.rating : null;
-            param.buyAgain = param.buyAgain ? param.buyAgain : null;
+            param.rating = param.rating ? (param.rating - 0) : null; //''->null, 0->0
+            param.buyAgain = param.buyAgain ? (param.buyAgain - 0) : null; //''->null, 0->0
             connection.query($sql.insert, [param.bakeryId, param.breadName, param.rating, 
             param.comment, param.buyAgain, param.image], function(err, result) {
+                console.log(err);               
                 if(result) {
-                    result = {
-                        code: 200,
-                        msg:'增加成功'
-                    };    
+                    res.render('suc');
                 }
-                jsonWrite(res, result);
                 connection.release();
             });
         });
     },
 
     delete: function (req, res, next) {
-        //delete by id
         pool.getConnection(function(err, connection) {
-            var param = req.query || req.params;
-            connection.query($sql.delete, [param.breadId], function(err, result) {
+            connection.query($sql.delete, req.params.breadId, function(err, result) {
                 if(result.affectedRows > 0) {
-                    result = {
-                        code: 200,
-                        msg:'删除成功'
-                    };
+                    res.render('suc');
                 } else {
-                    result = void 0;
+                    res.render('fail',{
+                        result: result
+                    });
                 }
                 connection.release();
             });
@@ -106,18 +109,16 @@ module.exports = {
 
     update: function (req, res, next) {
         var param = req.body;
-        var breadId = req.params.breadId - 0;
-        var rating = param.rating - 0;
-        var buyAgain = param.buyAgain - 0;
         if(param.breadName == '' ) {
             jsonWrite(res, '面包叫啥勒');
             return;
         }
+        var breadId = req.params.breadId - 0;
         pool.getConnection(function(err, connection) {
-            param.rating = param.rating ? param.rating : null;
-            param.buyAgain = param.buyAgain ? param.buyAgain : null;
-            connection.query($sql.update, [param.bakeryId, param.breadName, rating, 
-            param.comment, buyAgain, param.image, breadId], function(err, result) {
+            param.rating = param.rating ? (param.rating - 0) : null;
+            param.buyAgain = param.buyAgain ? (param.buyAgain - 0) : null;
+            connection.query($sql.update, [param.bakeryId, param.breadName, param.rating, 
+            param.comment, param.buyAgain, param.image, breadId], function(err, result) {
                 console.log('err:'+err);
                 // 使用页面进行跳转提示
                 if(result && result.affectedRows > 0) {

@@ -21,7 +21,7 @@ var jsonWrite = function (res, ret) {
 };
 
 module.exports = {
-    showBakery: function (req, res, next) {
+    queryAll: function (req, res, next) {
         pool.getConnection(function(err, connection) {
             connection.query($sql.queryAll, function(err, result) {
                 res.render('bakery', {
@@ -35,39 +35,42 @@ module.exports = {
     add: function (req, res, next) {
         pool.getConnection(function(err, connection) {
             if (err) throw err; 
-            var param = req.query || req.params;
-            if((param.bakeryName == '' )||(param.bakeryName == '' )) {
+            var param = req.body;
+            if((param.bakeryName == undefined )||(param.bakeryName == '' )) {
                 jsonWrite(res, '面包店叫啥勒');
                 return;
             }            
             connection.query($sql.insert, [param.bakeryName, param.address, param.image], function(err, result) {
             console.log(err);
                if(result) {
-                    result = {
-                        code: 200,
-                        msg:'增加成功'
-                    };    
+                    res.render('suc');    
                 }
-                console.log(result);
-                jsonWrite(res, result);
                 connection.release();
             });
         });
     },
 
     delete: function (req, res, next) {
-        //delete by id
         pool.getConnection(function(err, connection) {
-            var param = req.query || req.params;
-            connection.query($sql.delete, [param.bakeryID], function(err, result) {
+            connection.query($sql.delete, req.params.bakeryId, function(err, result) {
                 if(result.affectedRows > 0) {
-                    result = {
-                        code: 200,
-                        msg:'删除成功'
-                    };
+                    res.render('suc');
                 } else {
-                    result = void 0;
+                    res.render('fail',{
+                        result: result
+                    });
                 }
+                connection.release();
+            });
+        });
+    },
+
+    updateChart: function (req, res, next) {
+        pool.getConnection(function(err, connection) {
+            connection.query($sql.queryById, req.params.bakeryId, function(err, result) {
+                res.render('updateBakery',{
+                    list: result
+                });
                 connection.release();
             });
         });
@@ -75,17 +78,15 @@ module.exports = {
 
     update: function (req, res, next) {
         var param = req.body;
-        if(param.bakeryName == null || param.address == null || param.image == null) {
+        if(param.bakeryName == null || param.bakeryName == '') {
+            jsonWrite(res, '面包叫啥勒');            
             return;
         }
         pool.getConnection(function(err, connection) {
-            connection.query($sql.update, [param.bakeryName, param.address, param.image, param.bakeryId], function(err, result) {
+            connection.query($sql.update, [param.bakeryName, param.address, param.image, req.params.bakeryId], function(err, result) {
                 // 使用页面进行跳转提示
-                console.log(result);
                 if(result.affectedRows > 0) {
-                    res.render('suc', {
-                        result: result
-                    }); // 第二个参数可以直接在jade中使用
+                    res.render('suc'); // 第二个参数可以直接在jade中使用
                 } else {
                     res.render('fail',  {
                         result: result
@@ -97,9 +98,8 @@ module.exports = {
     },
 
     queryById: function (req, res, next) {
-        var id = req.query.id; // 为了拼凑正确的sql语句，这里要转下整数
         pool.getConnection(function(err, connection) {
-            connection.query($sql.queryById, id, function(err, result) {
+            connection.query($sql.queryById, req.query.bakeryId, function(err, result) {
                 jsonWrite(res, result);
                 connection.release();
             });

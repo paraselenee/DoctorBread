@@ -2,7 +2,11 @@ extends layout
     
 block content 
     h1 #{title}
-    form(method='post', action='/bread/update/#{list[0].breadId}')
+    form(method='post')
+        div.form-row
+            label
+                span 面包
+                input(type='text',name='breadName',value="#{list[0].breadName}")
         div.form-row
             label
                 span 面包店
@@ -10,10 +14,6 @@ block content
                     each bakery in bakeryList
                         option(value="#{bakery.bakeryId}",selected=bakery.bakeryId == list[0].bakeryId) #{bakery.bakeryName}
                     option(value="/bakery/add") 添加新的面包店                    
-        div.form-row
-            label
-                span 面包
-                input(type='text',name='breadName',value="#{list[0].breadName}")
         div.form-row
             label
                 span 星星
@@ -43,4 +43,5 @@ block content
                 else
                     input(type='text',name='image',placeholder='传个照片~',value="#{list[0].image}")
         div.form-row
-            input(type='submit')
+            button(type="submit",formaction='/bread/update/#{list[0].breadId}',value="update") 更新
+            button(type="submit",formaction='/bread/delete/#{list[0].breadId}',value="delete") 删除

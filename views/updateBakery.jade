@@ -2,22 +2,18 @@ extends layout
 
 block content
     h1 更新面包房
-    form(method='post', action='/bakery/update')
-        div.form-row
-            label
-                span ID:
-                input(type='text',name='bakeryId')
+    form(method='post', action='/bakery/update/#{list[0].bakeryId}')
         div.form-row
             label
                 span 面包店:
-                input(type='text',name='bakeryName')
+                input(type='text',name='bakeryName',value="#{list[0].bakeryName}")
         div.form-row
             label
                 span 地址:
-                input(type='text',name='address')
+                input(type='text',name='address',value="#{list[0].address}")
         div.form-row
             label
                 span 图片:
-                input(type='text',name='image')
+                input(type='text',name='image',value="#{list[0].image}")
         div.form-row
             input(type='submit')

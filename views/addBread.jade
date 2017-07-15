@@ -1,50 +1,39 @@
-extends layout
-
+extends layout    
+    
 block content 
-    h1= '添加面包'
+    h1 添加面包
     form(method='post', action='/bread/add')
         div.form-row
             label
-                span 在哪家买的
-                select(name='bakeryId')
-                    option(value=0, ) #{bakery.bakeryName}
-                    each bakery in bakeryList
-                        option(value="#{bakery.bakeryId}") #{bakery.bakeryName}
+                span 买了啥
+                input(type='text',name='breadName')        
         div.form-row
             label
-                span 面包
-                input(type='text',name='breadName',value="#{list[0].breadName}")
+                span 面包店
+                select(id="mySelect",name='bakeryId')
+                    option(value=null,disabled,selected) 选个店
+                    each bakery in bakeryList
+                        option(value="#{bakery.bakeryId}") #{bakery.bakeryName}
+                    option(value="/bakery/add") 添加新的面包店                    
         div.form-row
             label
                 span 星星
-                if list[0].rating == null
-                    input(type='text',name='rating',value='')
-                else
-                    input(type='text',name='rating',value="#{list[0].rating}")
+                select(name='rating')
+                    option(value='',disabled,selected)
+                    - for (var i=0; i<8; i++){
+                        option(value=i) #{i}
+                    - }                  
         div.form-row
             label
                 span 说点啥
-                if list[0].comment == null
-                    input(type='text',name='comment',placeholder='请天牛侠多多指教~',value='')
-                else
-                    input(type='text',name='comment',placeholder='请天牛侠多多指教~',value="#{list[0].comment}")
+                input(type='text',name='comment',placeholder='请天牛侠多多指教~')
         div.form-row
             label
                 span 又买一次
-                if list[0].buyAgain == null
-                    input(type='text',name='buyAgain',value='')
-                else
-                    input(type='text',name='buyAgain',value="#{list[0].buyAgain}")
-                    
+                input(type='text',name='buyAgain')
         div.form-row
             label
                 span 图片
-                if list[0].image == null
-                    input(type='text',name='image',placeholder='传个照片~',value='')
-                else
-                    input(type='text',name='image',placeholder='传个照片~',value="#{list[0].image}")
+                input(type='text',name='image',placeholder='传个照片~')
         div.form-row
             input(type='submit')
-
-block append scripts
-    script

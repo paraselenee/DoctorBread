@@ -6,3 +6,10 @@ block content
 		p		
 			a(href='/bread/list/' + dot.bakeryName + '-' + dot.bakeryId ) #{dot.bakeryName}
 			| #{dot.address}
+			a(href='/bakery/update/' + dot.bakeryId ) 更新
+			form(method='post')
+				button(type="submit", formaction='/bakery/delete/#{dot.bakeryId}',value="delete") 删除
+
+	br
+	a(href='/bakery/add') 添加面包店
+	

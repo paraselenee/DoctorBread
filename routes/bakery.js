@@ -4,7 +4,7 @@ var router = express.Router();
 var bakeryDao = require('../dao/bakeryDao');
 
 router.get('/', function(req, res, next) {
-	bakeryDao.showBakery(req, res, next);
+	bakeryDao.queryAll(req, res, next);
 });
 
 router.get('/add', function(req, res, next) {
@@ -15,15 +15,15 @@ router.post('/add', function(req, res, next) {
     bakeryDao.add(req, res, next);
 });
 
-router.get('/delete', function(req, res, next) {
+router.post('/delete/:bakeryId', function(req, res, next) {
     bakeryDao.delete(req, res, next);
 });
 
-router.get('/update', function(req, res, next) {
-    res.render('updateBakery');
+router.get('/update/:bakeryId', function(req, res, next) {
+    bakeryDao.updateChart(req, res, next);
 });
 
-router.post('/update', function(req, res, next) {
+router.post('/update/:bakeryId', function(req, res, next) {
     bakeryDao.update(req, res, next);
 });
 

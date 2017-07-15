@@ -1,4 +1,19 @@
 extends layout
 
 block content
-    h1= "添加面包店"
+    h1 添加面包店
+    form(method='post', action='/bakery/add')
+        div.form-row
+            label
+                span 面包店
+                input(type='text',name='bakeryName')
+        div.form-row
+            label
+                span 地址
+                input(type='text',name='address')
+        div.form-row
+            label
+                span 照片
+                input(type='text',name='image')
+        div.form-row
+            input(type='submit')

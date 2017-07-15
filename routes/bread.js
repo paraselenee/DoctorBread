@@ -8,14 +8,14 @@ router.get('/list/:bakeryName-:bakeryId', function(req, res, next) {
 });
 
 router.get('/add', function(req, res, next) {
-    res.render('addBread');     
+	breadDao.addChart(req, res, next);
 });
 
 router.post('/add', function(req, res, next) {
     breadDao.add(req, res, next);
 });
 
-router.get('/delete', function(req, res, next) {
+router.post('/delete/:breadId', function(req, res, next) {
     breadDao.delete(req, res, next);
 });
 
