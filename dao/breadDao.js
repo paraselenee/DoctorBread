@@ -113,12 +113,11 @@ module.exports = {
             jsonWrite(res, '面包叫啥勒');
             return;
         }
-        var breadId = req.params.breadId - 0;
         pool.getConnection(function(err, connection) {
             param.rating = param.rating ? (param.rating - 0) : null;
             param.buyAgain = param.buyAgain ? (param.buyAgain - 0) : null;
             connection.query($sql.update, [param.bakeryId, param.breadName, param.rating, 
-            param.comment, param.buyAgain, param.image, breadId], function(err, result) {
+            param.comment, param.buyAgain, param.image, req.params.breadId], function(err, result) {
                 console.log('err:'+err);
                 // 使用页面进行跳转提示
                 if(result && result.affectedRows > 0) {

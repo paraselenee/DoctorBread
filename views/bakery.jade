@@ -6,10 +6,28 @@ block content
 		p		
 			a(href='/bread/list/' + dot.bakeryName + '-' + dot.bakeryId ) #{dot.bakeryName}
 			| #{dot.address}
-			a(href='/bakery/update/' + dot.bakeryId ) 更新
-			form(method='post')
-				button(type="submit", formaction='/bakery/delete/#{dot.bakeryId}',value="delete") 删除
+			//- a(href='/bakery/update/' + dot.bakeryId ) 更新
+			el-button-group(id='btn')
+				el-button(type="primary",icon="edit",href='/bakery/update/' + dot.bakeryId)
+				el-button(type="primary",icon="delete",href='/bakery/delete/#{dot.bakeryId}',value="delete")
+			//- form(type='submit',method='post')
+				//- button(type="submit", formaction='/bakery/delete/#{dot.bakeryId}',value="delete") 删除
 
 	br
 	a(href='/bakery/add') 添加面包店
-	
+	//- template
+	//- 	el-button(id='app',type="text",@click.native="visible = true") 点击打开 Message Box
+	div(id="app")
+		el-button(@click="visible = true") Button
+		el-dialog(v-model="visible" title="Hello world")
+			p Try Element	
+
+block append scripts
+	script.
+		new Vue({
+				el: '#app',
+				data: function() {
+				return { visible: false }
+				}
+			})
+		new Vue().$mount('#btn')
